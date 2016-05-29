@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  * Created by Administrator on 2016/5/29.
@@ -22,8 +23,13 @@ public class RegisterServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         Connection connection = DB.getConnection();
-        String sql = "";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        String sql = "INSERT INTO ";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
